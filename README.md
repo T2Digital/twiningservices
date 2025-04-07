@@ -1,4 +1,3 @@
-
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -36,6 +35,13 @@
             padding: 10px;
             margin-top: 10px;
         }
+        .note {
+            background: #fffae6;
+            padding: 10px;
+            border: 1px dashed #e0c200;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -47,23 +53,33 @@
         <div class="serviceItem">
             <label>اختر الخدمة</label>
             <select class="service" onchange="calculatePrice()">
-                <option value="750">كنبة 2 فردى</option>
-                <option value="1000">كنبة 3 فردى</option>
-                <option value="1500">كنبة ركنة</option>
-                <option value="1000">مرتبة عادية</option>
-                <option value="1200">مرتبة سوست</option>
-                <option value="900">كراسي سفرة قماش</option>
-                <option value="1000">كراسي سفرة قماش و خشب</option>
-                <option value="200">كراسي شازلونج</option>
-                <option value="1000">سجاد 6 متر</option>
-                <option value="1500">سجاد 9 متر</option>
-                <option value="2000">سجاد 12 متر</option>
-                <option value="900">ستائر تيل</option>
-                <option value="1000">ستائر تول 160 سم</option>
-                <option value="1200">ستائر تول 200 سم</option>
-                <option value="1500">ستائر تول 300 سم</option>
-                <option value="1500">نظافة غرفة الموبايل وتنظيف وإزالة ما عليه من ملصقات</option>
-                <option value="2000">باقي كلجنة الموبايل تنظيف وإزالة ما عليه من ملصقات</option>
+                <option value="35">تنظيف عميق - 35 جنيه/متر</option>
+                <option value="50">تنظيف ما بعد البناء والتشطيب - 50 جنيه/متر</option>
+                <option value="75">تنظيف شلتة الالياف الصناعية - 75 جنيه</option>
+                <option value="75">تنظيف موكيت عادى - 75 جنيه/متر</option>
+                <option value="75">تنظيف موكيت فايير - 75 جنيه/متر</option>
+                <option value="75">تنظيف مخدة كتب - 75 جنيه</option>
+                <option value="600">تنظيف كنبة ٢ مقعد - 600 جنيه</option>
+                <option value="750">تنظيف كنبة ٣ مقعد - 750 جنيه</option>
+                <option value="1400">تنظيف كنبة حرف L - 1400 جنيه</option>
+                <option value="75">تنظيف مخدة صغيرة - 75 جنيه</option>
+                <option value="100">تنظيف مخدة كبيرة - 100 جنيه</option>
+                <option value="250">تنظيف كرسي انتريه - 250 جنيه</option>
+                <option value="200">تنظيف كرسي صالون يد خشب - 200 جنيه</option>
+                <option value="450">تنظيف فوتيه - 450 جنيه</option>
+                <option value="300">تنظيف كرسي عثماني - 300 جنيه</option>
+                <option value="150">تنظيف كرسي سفرة ظهر وقاعدة - 150 جنيه</option>
+                <option value="100">تنظيف كرسي سفرة قاعدة فقط - 100 جنيه</option>
+                <option value="100">تنظيف كرسي بدون ذراع وظهر - 100 جنيه</option>
+                <option value="300">تنظيف شازلونج - 300 جنيه</option>
+                <option value="200">تنظيف كرسي هزاز - 200 جنيه</option>
+                <option value="900">تنظيف مرتبة كينج 2 متر - 900 جنيه</option>
+                <option value="800">تنظيف مرتبة دبل 180 سم - 800 جنيه</option>
+                <option value="700">تنظيف مرتبة كوين 160 سم - 700 جنيه</option>
+                <option value="700">تنظيف مرتبة سنجل 140 سم - 700 جنيه</option>
+                <option value="150">تنظيف شباك الوميتال - 150 جنيه</option>
+                <option value="300">تنظيف باب بلكونة الوميتال - 300 جنيه</option>
+                <option value="750">تنظيف يومي منتظم (10 ص - 6 م) بدون أدوات - 750 جنيه</option>
             </select>
             <input type="number" class="area" placeholder="العدد أو المساحة" oninput="calculatePrice()">
             <button onclick="removeService(this)">❌ حذف</button>
@@ -82,6 +98,12 @@
         <option value="أنثى">أنثى</option>
     </select>
     <textarea id="notes" placeholder="ملاحظات إضافية"></textarea>
+
+    <div class="note">
+        لدفع نصف قيمة الطلب مقدمًا يرجى التحويل على رقم محفظة <strong>01116199928</strong> ورفع صورة إثبات الدفع.
+    </div>
+    <input type="file" id="paymentProof" accept="image/*" required>
+
     <button onclick="getLocation()">📍 مشاركة الموقع</button>
     <input type="text" id="location" placeholder="موقعك" readonly>
     <button onclick="sendWhatsApp()">📲 تأكيد الحجز عبر واتساب</button>
@@ -142,6 +164,12 @@
         let notes = document.getElementById("notes").value.trim() || "لا يوجد";
         let location = document.getElementById("location").value.trim() || "لم يتم مشاركة الموقع";
         let totalPrice = document.getElementById("totalPrice").innerText;
+        let paymentProof = document.getElementById("paymentProof").files[0];
+
+        if (!paymentProof) {
+            alert("يرجى رفع صورة إثبات الدفع.");
+            return;
+        }
 
         let services = [];
         document.querySelectorAll(".serviceItem").forEach(item => {
@@ -150,13 +178,11 @@
             services.push(`${serviceText} - ${quantity}`);
         });
 
-        let message = `👤 الاسم: ${name}\n👫 النوع: ${gender}\n📞 الهاتف: ${phone}\n📍 الموقع: ${location}\n📍 العنوان: ${address}\n📅 التاريخ: ${date}\n📝 ملاحظات: ${notes}\n💰 السعر الإجمالي: ${totalPrice} جنيه\n🛠️ الخدمات:\n${services.join("\n")}`;
+        let message = `👤 الاسم: ${name}\n👫 النوع: ${gender}\n📞 الهاتف: ${phone}\n📍 الموقع: ${location}\n📍 العنوان: ${address}\n📅 التاريخ: ${date}\n📝 ملاحظات: ${notes}\n💰 السعر الإجمالي: ${totalPrice} جنيه\n🛠️ الخدمات:\n${services.join("\n")}\n📸 تم رفع إثبات الدفع.`;
 
-        // إرسال واتساب
         let waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(waUrl, "_blank");
 
-        // إرسال بريد إلكتروني أيضًا
         let mailtoLink = `mailto:Twiningtrade@gmail.com?subject=طلب حجز خدمة تنظيف من ${name}&body=${encodeURIComponent(message)}`;
         window.open(mailtoLink, "_blank");
     }
