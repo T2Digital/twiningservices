@@ -59,10 +59,10 @@
                 <option value="75">تنظيف شلتة الالياف الصناعية - 75 جنيه</option>
                 <option value="75">تنظيف موكيت عادى - 75 جنيه للمتر</option>
                 <option value="75">تنظيف موكيت فايير - 75 جنيه للمتر</option>
-                <option value="75">تنظيف مخدات الكتب - 75 جنيه للواحدة</option>
-                <option value="600">تنظيف كنية ٢ مقعد - 600 جنيه</option>
-                <option value="750">تنظيف كنية ٣ مقعد - 750 جنيه</option>
-                <option value="1400">تنظيف كتية حرف ( L) - 1400 جنيه</option>
+                <option value="75">تنظيف مخدات الكنب - 75 جنيه للواحدة</option>
+                <option value="600">تنظيف كنبة ٢ مقعد - 600 جنيه</option>
+                <option value="750">تنظيف كنبة ٣ مقعد - 750 جنيه</option>
+                <option value="1400">تنظيف كتبة حرف ( L) - 1400 جنيه</option>
                 <option value="75">تنظيف مخدات صغيرة - 75 جنيه للواحدة</option>
                 <option value="100">تنظيف مخدات كبيرة - 100 جنيه للواحدة</option>
                 <option value="250">تنظيف كرسى انتيريه - 250 جنيه</option>
@@ -74,10 +74,10 @@
                 <option value="100">تنظيف كرسى بدون ذراع وظهر - 100 جنيه</option>
                 <option value="300">تنظيف شاذلونج - 300 جنيه</option>
                 <option value="200">تنظيف كرسى هزاز - 200 جنيه</option>
-                <option value="900">تنظيف مرتية كيتج ٢م - 900 جنيه</option>
-                <option value="800">تنظيف مرتية ديل ١٨٠ سم - 800 جنيه</option>
-                <option value="700">تنظيف مرتية كوين ١٦٠ سم - 700 جنيه</option>
-                <option value="700">تنظيف مرتية سنجل ١٤٠ سم - 700 جنيه</option>
+                <option value="900">تنظيف مرتبة كيتج ٢م - 900 جنيه</option>
+                <option value="800">تنظيف مرتبة ديل ١٨٠ سم - 800 جنيه</option>
+                <option value="700">تنظيف مرتبة كوين ١٦٠ سم - 700 جنيه</option>
+                <option value="700">تنظيف مرتبة سنجل ١٤٠ سم - 700 جنيه</option>
                 <option value="150">تنظيف شباك غرفة الوميتال - 150 جنيه</option>
                 <option value="300">تنظيف باب بلكونة الوميتال - 300 جنيه</option>
                 <option value="750">التنظيف اليومى المنتظم (10ص - 6م) بدون أدوات - 750 جنيه</option>
@@ -101,7 +101,7 @@
     <textarea id="notes" placeholder="ملاحظات إضافية"></textarea>
 
     <div class="note">
-        لدفع نصف قيمة الطلب مقدمًا يرجى التحويل على رقم محفظة <strong>01116199928</strong> ورفع صورة إثبات الدفع.
+        يجب دفع نصف قيمة الطلب مقدمًا يرجى التحويل على رقم محفظة <strong>01116199928</strong> ورفع صورة إثبات الدفع.
     </div>
     <input type="file" id="paymentProof" accept="image/*" required>
 
