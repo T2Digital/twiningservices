@@ -1,29 +1,36 @@
-
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طلب خدمة تنظيف - توينينج لخدمات النظافة</title>
+    <title>احجز خدمة تنظيف احترافية في دقائق | توينينج للنظافة</title>
+    <meta name="description" content="احصل على خدمات تنظيف شاملة ومميزة للمنازل والمكاتب من توينينج. أسعار تنافسية، حجز سهل، جودة عالية، وخدمة عملاء ممتازة. احجز الآن عبر واتساب.">
+    <meta name="keywords" content="تنظيف منازل, تنظيف مكاتب, شركة نظافة, حجز تنظيف, تنظيف شامل, توينينج للنظافة">
+    <meta name="robots" content="index, follow">
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             direction: rtl;
-            background: #f2f2f2;
+            background: #e0f7fa;
+            margin: 0;
+            padding: 0;
         }
         .container {
             width: 90%;
             max-width: 400px;
-            margin: auto;
+            margin: 20px auto;
             padding: 20px;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
         select, input, textarea, button {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
         .logo {
             width: 100px;
@@ -35,6 +42,7 @@
             border-radius: 5px;
             padding: 10px;
             margin-top: 10px;
+            background: #f9f9f9;
         }
         .note {
             background: #fffae6;
@@ -43,13 +51,20 @@
             margin-top: 10px;
             border-radius: 5px;
         }
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            select, input, textarea, button {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <img src="https://i.postimg.cc/bvjDNQ0j/Whats-App-Image-2025-04-07-at-21-17-23-e65cadc5-removebg-preview.png" alt="شعار الشركة" class="logo">
     <h2>طلب خدمة - توينينج لخدمات النظافة</h2>
-
     <div id="servicesContainer">
         <div class="serviceItem">
             <label>اختر الخدمة</label>
@@ -86,10 +101,8 @@
             <button onclick="removeService(this)">❌ حذف</button>
         </div>
     </div>
-
     <button onclick="addService()">➕ إضافة خدمة أخرى</button>
     <p>💰 السعر الإجمالي: <span id="totalPrice">0</span> جنيه</p>
-
     <input type="text" id="name" placeholder="الاسم" required>
     <input type="tel" id="phone" placeholder="رقم الهاتف" required>
     <input type="text" id="address" placeholder="العنوان بالتفصيل" required>
@@ -99,17 +112,15 @@
         <option value="أنثى">أنثى</option>
     </select>
     <textarea id="notes" placeholder="ملاحظات إضافية"></textarea>
-
     <div class="note">
-        يجب دفع نصف قيمة الطلب مقدمًا يرجى التحويل على رقم محفظة <strong>01116199928</strong> ورفع صورة إثبات الدفع.
+        💵 يجب دفع نصف قيمة الطلب مقدمًا (أي <span id="halfPrice">0</span> جنيه) <br>
+        يرجى التحويل على رقم محفظة <strong>01116199928</strong> ورفع صورة إثبات الدفع.
     </div>
     <input type="file" id="paymentProof" accept="image/*" required>
-
     <button onclick="getLocation()">📍 مشاركة الموقع</button>
     <input type="text" id="location" placeholder="موقعك" readonly>
     <button onclick="sendWhatsApp()">📲 تأكيد الحجز عبر واتساب</button>
 </div>
-
 <script>
     function calculatePrice() {
         let totalPrice = 0;
@@ -119,8 +130,8 @@
             totalPrice += servicePrice * quantity;
         });
         document.getElementById("totalPrice").innerText = totalPrice;
+        document.getElementById("halfPrice").innerText = Math.ceil(totalPrice / 2);
     }
-
     function addService() {
         let serviceOptions = document.querySelector(".service").innerHTML;
         let container = document.getElementById("servicesContainer");
@@ -134,12 +145,10 @@
         `;
         container.appendChild(newService);
     }
-
     function removeService(button) {
         button.parentElement.remove();
         calculatePrice();
     }
-
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -154,7 +163,6 @@
             alert("المتصفح لا يدعم تحديد الموقع الجغرافي.");
         }
     }
-
     async function sendWhatsApp() {
         let phoneNumber = "201021584901";
         let name = document.getElementById("name").value.trim();
@@ -166,12 +174,10 @@
         let location = document.getElementById("location").value.trim() || "لم يتم مشاركة الموقع";
         let totalPrice = document.getElementById("totalPrice").innerText;
         let paymentProof = document.getElementById("paymentProof").files[0];
-
         if (!paymentProof) {
             alert("يرجى رفع صورة إثبات الدفع.");
             return;
         }
-
         const formData = new FormData();
         formData.append("image", paymentProof);
         const response = await fetch("https://api.imgbb.com/1/upload?key=bde613bd4475de5e00274a795091ba04", {
@@ -180,21 +186,15 @@
         });
         const result = await response.json();
         const proofUrl = result.data.url;
-
         let services = [];
         document.querySelectorAll(".serviceItem").forEach(item => {
             let serviceText = item.querySelector(".service").selectedOptions[0].text;
             let quantity = item.querySelector(".area").value || 1;
             services.push(`${serviceText} - ${quantity}`);
         });
-
-        let message = `👤 الاسم: ${name}\n👫 النوع: ${gender}\n📞 الهاتف: ${phone}\n📍 الموقع: ${location}\n📍 العنوان: ${address}\n📅 التاريخ: ${date}\n📝 ملاحظات: ${notes}\n💰 السعر الإجمالي: ${totalPrice} جنيه\n🛠️ الخدمات:\n${services.join("\n")}\n📸 إثبات الدفع: ${proofUrl}`;
-
-        // إرسال إلى واتساب
+        let message = `👤 الاسم: ${name}\n👫 النوع: ${gender}\n📞 الهاتف: ${phone}\n📍 الموقع: ${location}\n📍 العنوان: ${address}\n🗓 التاريخ: ${date}\n📝 ملاحظات: ${notes}\n💰 السعر الإجمالي: ${totalPrice} جنيه\n🚰 الخدمات:\n${services.join("\n")}\n📸 إثبات الدفع: ${proofUrl}`;
         let waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(waUrl, "_blank");
-
-        // إرسال إلى البريد
         let mailtoLink = `mailto:Twiningtrade@gmail.com?subject=طلب حجز خدمة تنظيف من ${name}&body=${encodeURIComponent(message)}`;
         window.open(mailtoLink, "_blank");
     }
